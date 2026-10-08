@@ -1,0 +1,25 @@
+.PHONY: all clean cleanwin
+
+CFLAGS=-c -I.
+LDFLAGS=-ggdb
+
+all: lab8-main.exe
+
+# Link all the object files to form an executable program
+lab8-main.exe: main.o Node.o
+	g++ $(LDFLAGS) $^  -o $@
+
+# Compile Node.cc
+Node.o: Node.cc Node.h
+	g++ $(CFLAGS) $<
+
+# Compile main.cc
+main.o: main.cc Node.h
+	g++ $(CFLAGS) $<
+
+clean:
+	rm -f *.o *.exe
+
+cleanwin:
+	del *.o
+	del *.exe
